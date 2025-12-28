@@ -2532,17 +2532,9 @@
           <span class="foundprint-summary-item"><span class="foundprint-difficulty foundprint-difficulty-hard">Hard</span> ${hardTests.length} <span class="foundprint-entropy-bits">(${hardEntropy.toFixed(1)} bits)</span></span>
         </div>
         <div class="foundprint-entropy-potential">
-          <h4 class="foundprint-potential-header">Potential Entropy Reduction</h4>
+          <h4 class="foundprint-potential-header">The Hard Truth</h4>
           <p class="foundprint-potential-row">
-            <span class="foundprint-potential-label">If you changed all <span class="foundprint-difficulty foundprint-difficulty-easy">Easy</span> attributes:</span>
-            <span class="foundprint-potential-value">−${easyEntropy.toFixed(1)} bits → 1 in ${easyPotential.text}</span>
-          </p>
-          <p class="foundprint-potential-row">
-            <span class="foundprint-potential-label">If you also changed <span class="foundprint-difficulty foundprint-difficulty-medium">Medium</span> attributes:</span>
-            <span class="foundprint-potential-value">−${(easyEntropy + mediumEntropy).toFixed(1)} bits → 1 in ${easyMediumPotential.text}</span>
-          </p>
-          <p class="foundprint-potential-row foundprint-potential-hard">
-            <span class="foundprint-potential-label"><span class="foundprint-difficulty foundprint-difficulty-hard">Hard</span> attributes alone (${hardEntropy.toFixed(1)} bits) make you <strong>1 in ${hardOnlyFormatted.text}</strong>.</span>
+            Even if you changed all <span class="foundprint-difficulty foundprint-difficulty-easy">Easy</span> and <span class="foundprint-difficulty foundprint-difficulty-medium">Medium</span> attributes (−${(easyEntropy + mediumEntropy).toFixed(1)} bits), the <span class="foundprint-difficulty foundprint-difficulty-hard">Hard</span> attributes alone (${hardEntropy.toFixed(1)} bits) still make you <strong>1 in ${hardOnlyFormatted.text}</strong>.
           </p>
           <p class="foundprint-potential-note">These can be spoofed or disabled, but require significant research and effort.</p>
         </div>
