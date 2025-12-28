@@ -1,0 +1,524 @@
+/**
+ * FOUNDprint Styles
+ * Minimal, clean styling for the fingerprinting demonstration
+ *
+ * This component is designed to fill its container and inherit fonts.
+ * For standalone use, the host page should provide base styling.
+ */
+
+/* Container - fills parent, inherits font */
+#foundprint-demo {
+  font-family: inherit;
+  line-height: 1.7;
+  width: 100%;
+  color: #1a1a1a;
+}
+
+/* Header */
+.foundprint-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.foundprint-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin: 0;
+  color: #1a1a1a;
+}
+
+/* Footer */
+.foundprint-footer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.foundprint-footer p {
+  margin: 0 0 0.25rem 0;
+}
+
+.foundprint-footer p:last-child {
+  margin-bottom: 0;
+}
+
+.foundprint-footer a {
+  color: #666;
+  text-decoration: none;
+}
+
+.foundprint-footer a:hover {
+  text-decoration: underline;
+}
+
+.foundprint-footer-privacy {
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/* Tagline */
+.foundprint-tagline {
+  font-size: 0.95rem;
+}
+
+.foundprint-tagline a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.foundprint-tagline a:hover {
+  text-decoration: underline;
+}
+
+/* Disclaimer box */
+.foundprint-disclaimer {
+  background: #f4f4f4;
+  border: 1px solid #e0e0e0;
+  padding: 2rem;
+  border-radius: 6px;
+  text-align: center;
+  transition: opacity 0.3s ease;
+}
+
+.foundprint-disclaimer.fade-out {
+  opacity: 0;
+}
+
+.foundprint-disclaimer p {
+  margin: 0 0 1.5rem 0;
+  color: #444;
+}
+
+/* Start button */
+.foundprint-start {
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 0.85rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.foundprint-start:hover {
+  background: #1a1a1a;
+}
+
+.foundprint-start:active {
+  transform: translateY(1px);
+}
+
+/* Results area */
+.foundprint-results {
+  padding: 0.5rem 0;
+}
+
+/* Individual result line */
+.foundprint-line {
+  margin-bottom: 1.25rem;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.foundprint-line.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.foundprint-content {
+  margin-bottom: 0.25rem;
+}
+
+.foundprint-content strong {
+  color: #000;
+  font-weight: 600;
+}
+
+/* Running count */
+.foundprint-count {
+  font-size: 0.9rem;
+  color: #666;
+  padding-left: 0.5rem;
+  border-left: 2px solid #e0e0e0;
+}
+
+/* Per-test uniqueness line */
+.foundprint-test-unique {
+  font-size: 0.85rem;
+  color: #888;
+  margin: 0.25rem 0;
+  font-style: italic;
+}
+
+.foundprint-test-unique a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.foundprint-test-unique a:hover {
+  text-decoration: underline;
+}
+
+.foundprint-estimated {
+  color: #aaa;
+  font-size: 0.8em;
+}
+
+/* When user becomes statistically unique */
+.foundprint-count.foundprint-unique {
+  color: #c41e3a;
+  border-left-color: #c41e3a;
+  font-weight: 500;
+}
+
+.foundprint-unique-detail {
+  font-size: 1rem;
+  color: #555;
+  margin: 0.5rem 0 1rem 0;
+}
+
+/* Final reveal */
+.foundprint-final {
+  border-top: 1px solid #e0e0e0;
+  border-bottom: none;
+  padding: 2rem 0 0 0;
+  margin: 2.5rem 0 0 0;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.foundprint-final.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.foundprint-summary {
+  font-size: 1rem;
+  color: #444;
+  margin: 0 0 1rem 0;
+}
+
+.foundprint-uniqueness {
+  font-size: 1.5rem;
+  margin: 0 0 1rem 0;
+}
+
+.foundprint-uniqueness strong {
+  color: #000;
+}
+
+/* Inline hash display (in test results) */
+.foundprint-inline-hash {
+  background: #f0f0f0;
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+  font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+  font-size: 0.75em;
+  letter-spacing: 0.02em;
+  max-width: 10em;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* Final fingerprint hash display */
+.foundprint-hash {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 1rem 0;
+}
+
+.foundprint-hash code {
+  background: #f5f5f5;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+.foundprint-punchline {
+  font-size: 1.1rem;
+  margin: 0;
+  color: #333;
+}
+
+.foundprint-punchline strong {
+  font-weight: 600;
+}
+
+/* End state */
+.foundprint-end {
+  text-align: center;
+  padding: 1rem 0 0 0;
+  color: #555;
+}
+
+.foundprint-end p {
+  margin: 0 0 1rem 0;
+}
+
+.foundprint-end a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.foundprint-end a:hover {
+  text-decoration: underline;
+}
+
+/* Restart button */
+.foundprint-restart {
+  background: transparent;
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 1rem 0;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.foundprint-restart:hover {
+  border-color: #999;
+  background: #f5f5f5;
+}
+
+/* Failed tests */
+.foundprint-failed {
+  color: #888;
+  font-style: italic;
+  font-size: 0.85rem;
+  margin-top: 1.5rem;
+}
+
+.foundprint-success {
+  color: #666;
+  font-size: 0.85rem;
+  margin-top: 1.5rem;
+}
+
+/* Report section */
+.foundprint-report {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+  text-align: left;
+}
+
+.foundprint-report-header {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: #1a1a1a;
+  text-align: center;
+}
+
+.foundprint-report-intro {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0 0 1rem 0;
+  text-align: center;
+}
+
+.foundprint-report-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.foundprint-report-table th,
+.foundprint-report-table td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.foundprint-report-table th {
+  font-weight: 600;
+  color: #555;
+  background: #f4f4f4;
+}
+
+.foundprint-report-table td:first-child {
+  font-weight: 500;
+}
+
+.foundprint-report-table td:last-child {
+  color: #666;
+}
+
+/* Difficulty badges */
+.foundprint-difficulty {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.foundprint-difficulty-easy {
+  background: #d4edda;
+  color: #155724;
+}
+
+.foundprint-difficulty-medium {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.foundprint-difficulty-hard {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* Report summary */
+.foundprint-report-summary {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1.25rem 0;
+  padding: 0.75rem;
+  background: #f4f4f4;
+  border-radius: 4px;
+}
+
+.foundprint-summary-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Entropy bits display */
+.foundprint-entropy-bits {
+  font-size: 0.8rem;
+  color: #888;
+  font-weight: 400;
+}
+
+/* Entropy potential section */
+.foundprint-entropy-potential {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+.foundprint-potential-header {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem 0;
+  color: #333;
+}
+
+.foundprint-potential-row {
+  margin: 0.5rem 0;
+  font-size: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.foundprint-potential-label {
+  color: #555;
+}
+
+.foundprint-potential-value {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.foundprint-potential-hard {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.foundprint-potential-hard .foundprint-potential-label {
+  color: #721c24;
+}
+
+.foundprint-potential-note {
+  font-size: 0.8rem;
+  color: #666;
+  margin: 0.25rem 0 0 0;
+  font-style: italic;
+}
+
+/* Report note */
+.foundprint-report-note {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 1rem 0 0 0;
+  text-align: center;
+  font-style: italic;
+}
+
+.foundprint-report-note a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.foundprint-report-note a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .foundprint-disclaimer {
+    padding: 1.5rem;
+  }
+
+  .foundprint-uniqueness {
+    font-size: 1.25rem;
+  }
+
+  .foundprint-line {
+    margin-bottom: 1rem;
+  }
+
+  .foundprint-report-table th,
+  .foundprint-report-table td {
+    padding: 0.4rem 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .foundprint-report-summary {
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .foundprint-difficulty {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.4rem;
+  }
+
+  .foundprint-entropy-potential {
+    padding: 0.75rem;
+  }
+
+  .foundprint-potential-row {
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .foundprint-entropy-bits {
+    display: block;
+    margin-top: 0.15rem;
+  }
+}
