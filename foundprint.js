@@ -2533,12 +2533,8 @@
         </div>
         <div class="foundprint-entropy-potential">
           <h4 class="foundprint-potential-header">The Hard Truth</h4>
-          <p class="foundprint-potential-row">
-            Even if you changed all <span class="foundprint-difficulty foundprint-difficulty-easy">Easy</span> and <span class="foundprint-difficulty foundprint-difficulty-medium">Medium</span> attributes (−${(easyEntropy + mediumEntropy).toFixed(1)} bits), the <span class="foundprint-difficulty foundprint-difficulty-hard">Hard</span> attributes alone (${hardEntropy.toFixed(1)} bits) still make you <strong>1 in ${hardOnlyFormatted.text}</strong>.
-          </p>
-          <p class="foundprint-potential-note">These can be spoofed or disabled, but require significant research and effort.</p>
+          <p class="foundprint-potential-row">Even if you changed all <span class="foundprint-difficulty foundprint-difficulty-easy">Easy</span> and <span class="foundprint-difficulty foundprint-difficulty-medium">Medium</span> attributes (−${(easyEntropy + mediumEntropy).toFixed(1)} bits), the <span class="foundprint-difficulty foundprint-difficulty-hard">Hard</span> attributes alone (${hardEntropy.toFixed(1)} bits) still make you <strong>1 in ${hardOnlyFormatted.text}</strong>. <strong>${hardTests.length} of ${completedTests.length}</strong> attributes are difficult or impractical to change for most users. Disabling JavaScript prevents most fingerprinting, but breaks many websites. Modern fingerprinting scripts also incorporate significantly more tests than the ${completedTests.length} shown here. <a href="https://chris.neal.media/2025/the-vpn-trap/" target="_blank" rel="noopener">Learn more &raquo;</a></p>
         </div>
-        <p class="foundprint-report-note"><strong>${hardTests.length} of ${completedTests.length}</strong> attributes are difficult or impractical to change for most users. Disabling JavaScript prevents most fingerprinting, but breaks many websites. Modern fingerprinting scripts also incorporate significantly more tests than the ${completedTests.length} shown here. <a href="https://chris.neal.media/2025/the-vpn-trap/" target="_blank" rel="noopener">Learn more &raquo;</a></p>
       </div>
     `;
 

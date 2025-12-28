@@ -414,7 +414,7 @@
 
 /* Entropy potential section */
 .foundprint-entropy-potential {
-  margin: 1.5rem 0;
+  margin: 1.5rem 0 0 0;
   padding: 1rem;
   border-radius: 6px;
 }
@@ -427,54 +427,17 @@
 }
 
 .foundprint-potential-row {
-  margin: 0.5rem 0;
+  margin: 0;
   font-size: 0.85rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem;
+  line-height: 1.5;
 }
 
-.foundprint-potential-label {
-  color: #555;
-}
-
-.foundprint-potential-value {
-  font-weight: 500;
-  color: #1a1a1a;
-}
-
-.foundprint-potential-hard {
-  margin-top: 0.75rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid #e0e0e0;
-}
-
-.foundprint-potential-hard .foundprint-potential-label {
-  color: #721c24;
-}
-
-.foundprint-potential-note {
-  font-size: 0.8rem;
-  color: #666;
-  margin: 0.25rem 0 0 0;
-  font-style: italic;
-}
-
-/* Report note */
-.foundprint-report-note {
-  font-size: 0.85rem;
-  color: #666;
-  margin: 1rem 0 0 0;
-  text-align: center;
-  font-style: italic;
-}
-
-.foundprint-report-note a {
+.foundprint-potential-row a {
   color: #0066cc;
   text-decoration: none;
 }
 
-.foundprint-report-note a:hover {
+.foundprint-potential-row a:hover {
   text-decoration: underline;
 }
 
@@ -512,10 +475,6 @@
     padding: 0.75rem;
   }
 
-  .foundprint-potential-row {
-    flex-direction: column;
-    gap: 0.15rem;
-  }
 
   .foundprint-entropy-bits {
     display: block;
