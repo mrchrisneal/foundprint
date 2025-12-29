@@ -26,7 +26,7 @@
   // ==========================================================================
 
   const CONFIG = {
-    version: '1.1.2',
+    version: '1.1.3',
     revealDelay: 400,        // ms between revealing each result
     typewriterSpeed: 15,     // ms per character (0 = instant)
     dramaticPause: 1200,     // ms before final results
