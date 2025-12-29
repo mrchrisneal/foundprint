@@ -26,7 +26,7 @@
   // ==========================================================================
 
   const CONFIG = {
-    version: '1.1.0',
+    version: '1.1.1',
     revealDelay: 400,        // ms between revealing each result
     typewriterSpeed: 15,     // ms per character (0 = instant)
     dramaticPause: 1200,     // ms before final results
@@ -653,8 +653,8 @@
 
     pixelRatio: {
       name: 'Pixel Ratio',
-      difficulty: 'hard',
-      changeRequires: 'Different display',
+      difficulty: 'medium',
+      changeRequires: 'Different display or browser; zoom level may affect this',
       run: function() {
         const rawRatio = window.devicePixelRatio || 1;
         const analysis = analyzePixelRatio(rawRatio);
@@ -1487,7 +1487,7 @@
         </div>
         <div class="foundprint-entropy-potential">
           <h4 class="foundprint-potential-header">The Hard Truth</h4>
-          <p class="foundprint-potential-row">Even if you changed all <span class="foundprint-difficulty foundprint-difficulty-easy">Easy</span> and <span class="foundprint-difficulty foundprint-difficulty-medium">Medium</span> attributes (−${(easyEntropy + mediumEntropy).toFixed(1)} bits), the <span class="foundprint-difficulty foundprint-difficulty-hard">Hard</span> attributes alone (${hardEntropy.toFixed(1)} bits) still make you <strong>1 in ${hardOnlyFormatted.text}</strong>. <strong>${hardTests.length} of ${completedTests.length}</strong> attributes are difficult or impractical to change for most users. Disabling JavaScript prevents most fingerprinting, but breaks many websites. Modern fingerprinting scripts also incorporate significantly more tests than the ${completedTests.length} shown here. <a href="https://chris.neal.media/2025/the-vpn-trap/" target="_blank" rel="noopener">Learn more &raquo;</a></p>
+          <p class="foundprint-potential-row">Even if you changed all <span class="foundprint-difficulty foundprint-difficulty-easy">Easy</span> and <span class="foundprint-difficulty foundprint-difficulty-medium">Medium</span> attributes (−${(easyEntropy + mediumEntropy).toFixed(1)} bits), the <span class="foundprint-difficulty foundprint-difficulty-hard">Hard</span> attributes alone (${hardEntropy.toFixed(1)} bits) still make you <strong>1 in ${hardOnlyFormatted.text}</strong>. <strong>${hardTests.length} of ${completedTests.length}</strong> attributes are difficult or impractical to change for most users. On mobile and embedded/IoT devices with browsers, many of these characteristics are completely fixed and cannot be changed. Disabling JavaScript prevents most fingerprinting, but breaks many websites. Modern fingerprinting scripts also incorporate significantly more tests than the ${completedTests.length} shown here. <a href="https://chris.neal.media/2025/the-vpn-trap/" target="_blank" rel="noopener" title="Read the original blog post that inspired this project">Learn more &raquo;</a></p>
         </div>
       </div>
     `;
