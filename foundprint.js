@@ -139,7 +139,7 @@
 
   const CONFIG = {
     // The version number of this script (follows semantic versioning: major.minor.patch)
-    version: '1.0.1',
+    version: '1.0.2',
 
     // Animation timing settings (all values are in milliseconds)
     // 1000 milliseconds = 1 second
@@ -1204,6 +1204,132 @@
   }
 
   /**
+   * analyzePixelRatio - Detect if devicePixelRatio appears to be affected by zoom
+   * -------------------------------------------------------------------------------
+   * Browser zoom affects window.devicePixelRatio, making fingerprinting unreliable.
+   * For example, a 1x display at 110% zoom reports 1.1 DPR.
+   *
+   * This function analyzes the reported ratio and attempts to determine:
+   * 1. Whether zoom is likely applied
+   * 2. What the "true" (unzoomed) device pixel ratio probably is
+   *
+   * STRATEGY:
+   * Common base DPRs: 1, 1.25, 1.5, 2, 2.5, 3
+   * Common zoom levels: 100%, 110%, 125%, 150%, 175%, 200%
+   *
+   * If the ratio = baseDPR × zoomFactor (within tolerance), we can infer both.
+   *
+   * LIMITATIONS:
+   * - Cannot definitively distinguish 2x DPR from 1x at 200% zoom
+   * - Safari doesn't change DPR with zoom (so zoom detection doesn't apply)
+   * - This is a heuristic, not a guarantee
+   *
+   * @param {number} ratio - The raw window.devicePixelRatio value
+   * @returns {Object} - { displayRatio, trueDPR, zoomPercent, isZoomed, confidence }
+   */
+  function analyzePixelRatio(ratio) {
+    // Round to 3 decimal places for cleaner display and comparison
+    const displayRatio = Math.round(ratio * 1000) / 1000;
+
+    // Known base device pixel ratios - order matters for priority!
+    // We check DPR 1 first because it's most common and we want to prefer
+    // "1x screen with zoom" over "2x screen with zoom-out" interpretations
+    const knownDPRs = [1, 1.25, 1.5, 2, 2.5, 3];
+
+    // Common browser zoom levels as multipliers
+    // Includes all standard browser zoom presets
+    const commonZoomLevels = [
+      { zoom: 1.0,   percent: 100 },
+      { zoom: 1.1,   percent: 110 },
+      { zoom: 1.2,   percent: 120 },
+      { zoom: 1.25,  percent: 125 },
+      { zoom: 1.33,  percent: 133 },
+      { zoom: 1.5,   percent: 150 },
+      { zoom: 1.75,  percent: 175 },
+      { zoom: 2.0,   percent: 200 },
+      { zoom: 0.9,   percent: 90 },
+      { zoom: 0.8,   percent: 80 },
+      { zoom: 0.75,  percent: 75 },
+      { zoom: 0.67,  percent: 67 },
+      { zoom: 0.5,   percent: 50 },
+      { zoom: 0.33,  percent: 33 },
+      { zoom: 0.3,   percent: 30 }
+    ];
+
+    // Tolerance for matching (accounts for floating-point imprecision)
+    const tolerance = 0.015;
+
+    // Check if the ratio exactly matches a known DPR (no zoom)
+    for (const baseDPR of knownDPRs) {
+      if (Math.abs(displayRatio - baseDPR) < tolerance) {
+        return {
+          displayRatio,
+          trueDPR: baseDPR,
+          zoomPercent: 100,
+          isZoomed: false,
+          confidence: 'high',
+          matchedBucket: String(baseDPR)
+        };
+      }
+    }
+
+    // Try to find a baseDPR × zoom combination that matches
+    // IMPORTANT: We iterate DPRs in order (1 first) and prefer lower DPRs
+    // This ensures "1x at 120% zoom" beats "1.5x at 80% zoom" when both match
+    let allMatches = [];
+
+    for (const baseDPR of knownDPRs) {
+      for (const { zoom, percent } of commonZoomLevels) {
+        if (percent === 100) continue; // Already checked exact matches
+
+        const expectedRatio = baseDPR * zoom;
+        const diff = Math.abs(displayRatio - expectedRatio);
+
+        if (diff < tolerance) {
+          allMatches.push({
+            displayRatio,
+            trueDPR: baseDPR,
+            zoomPercent: percent,
+            isZoomed: true,
+            confidence: 'medium',
+            matchedBucket: String(baseDPR),
+            diff: diff
+          });
+        }
+      }
+    }
+
+    if (allMatches.length > 0) {
+      // Sort matches by priority:
+      // 1. Prefer lower base DPR (1x screens are most common)
+      // 2. For same DPR, prefer smaller diff (better match)
+      allMatches.sort((a, b) => {
+        if (a.trueDPR !== b.trueDPR) {
+          return a.trueDPR - b.trueDPR; // Lower DPR wins
+        }
+        return a.diff - b.diff; // Better match wins
+      });
+
+      const best = allMatches[0];
+      delete best.diff; // Remove internal property
+      return best;
+    }
+
+    // No match found - this is an unusual ratio
+    // Assume it's a 1x screen with unusual zoom (most common case)
+    const inferredZoom = Math.round(displayRatio * 100);
+
+    return {
+      displayRatio,
+      trueDPR: 1, // Assume standard density screen
+      zoomPercent: inferredZoom,
+      isZoomed: true,
+      confidence: 'low',
+      matchedBucket: '1' // Match to standard density bucket
+    };
+  }
+
+  /**
    * sleep - Pause execution for a specified time
    * ---------------------------------------------
    * This function is used to create delays for animations.
@@ -1350,43 +1476,76 @@
       difficulty: 'hard',
       changeRequires: 'Different display',
       run: function() {
-        const ratio = window.devicePixelRatio || 1;
-        const desc = ratio > 1 ? 'high-density (Retina/HiDPI)' : 'standard density';
+        const rawRatio = window.devicePixelRatio || 1;
 
-        // Try to match against Panopticlick pixel ratio data
-        const lookup = lookupMarketShare(PIXEL_RATIO_DATA, String(ratio));
+        // Analyze the ratio for zoom detection and smart bucket matching
+        const analysis = analyzePixelRatio(rawRatio);
 
-        // If no match found, fall back to baseline entropy
-        if (lookup.estimated) {
-          const baseline = BASELINE_ENTROPY.pixelRatio;
-          return {
-            value: ratio,
-            message: `Your display has a **${ratio}x pixel ratio** (${desc}).`,
-            lookup: {
-              percent: null,
-              source: baseline.source,
-              sourceLabel: baseline.sourceLabel,
-              estimated: true,
-              entropy: baseline.bits,
-              oneInX: Math.pow(2, baseline.bits),
-              note: baseline.note
-            }
-          };
+        // Determine density description based on TRUE DPR (not zoomed value)
+        // High-density displays are typically 2x or higher
+        let desc;
+        if (analysis.trueDPR >= 2) {
+          desc = 'high-density (Retina/HiDPI)';
+        } else if (analysis.trueDPR >= 1.5) {
+          desc = 'enhanced density';
+        } else {
+          desc = 'standard density';
         }
 
-        const entropy = percentToEntropy(lookup.percent);
-        const oneInX = percentToOneInX(lookup.percent);
+        // Build the message - include zoom info if detected, with confidence level
+        let message;
+        if (analysis.isZoomed) {
+          if (analysis.confidence === 'high') {
+            // High confidence: exact match to known DPR × zoom combination
+            message = `Your display has a **${analysis.displayRatio}x pixel ratio** (${desc}, browser zoomed to ${analysis.zoomPercent}%).`;
+          } else if (analysis.confidence === 'medium') {
+            // Medium confidence: likely zoom detected
+            message = `Your display has a **${analysis.displayRatio}x pixel ratio** (${desc}, likely browser zoom ~${analysis.zoomPercent}%).`;
+          } else {
+            // Low confidence: unusual ratio, best guess
+            message = `Your display has a **${analysis.displayRatio}x pixel ratio** (${desc}, unusual value - may be affected by zoom).`;
+          }
+        } else {
+          message = `Your display has a **${analysis.displayRatio}x pixel ratio** (${desc}).`;
+        }
 
+        // Use the matched bucket if we have confidence, otherwise use estimated entropy
+        if (analysis.matchedBucket) {
+          // Try to match against Panopticlick pixel ratio data using the TRUE DPR
+          const lookup = lookupMarketShare(PIXEL_RATIO_DATA, analysis.matchedBucket);
+
+          if (!lookup.estimated) {
+            const entropy = percentToEntropy(lookup.percent);
+            const oneInX = percentToOneInX(lookup.percent);
+
+            return {
+              value: analysis.displayRatio, // Use the actual ratio for fingerprinting
+              message: message,
+              lookup: {
+                percent: lookup.percent,
+                source: lookup.source,
+                sourceLabel: PIXEL_RATIO_DATA.sourceLabel,
+                estimated: false,
+                entropy: entropy,
+                oneInX: oneInX
+              }
+            };
+          }
+        }
+
+        // Fall back to baseline entropy for unusual ratios
+        const baseline = BASELINE_ENTROPY.pixelRatio;
         return {
-          value: ratio,
-          message: `Your display has a **${ratio}x pixel ratio** (${desc}).`,
+          value: analysis.displayRatio,
+          message: message,
           lookup: {
-            percent: lookup.percent,
-            source: lookup.source,
-            sourceLabel: PIXEL_RATIO_DATA.sourceLabel,
-            estimated: false,
-            entropy: entropy,
-            oneInX: oneInX
+            percent: null,
+            source: baseline.source,
+            sourceLabel: baseline.sourceLabel,
+            estimated: true,
+            entropy: baseline.bits,
+            oneInX: Math.pow(2, baseline.bits),
+            note: baseline.note
           }
         };
       }
