@@ -1,0 +1,63 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Generate SRI hashes
+        id: sri
+        run: |
+          JS_HASH=$(openssl dgst -sha384 -binary foundprint.js | openssl base64 -A)
+          CSS_HASH=$(openssl dgst -sha384 -binary foundprint.css | openssl base64 -A)
+          echo "js_hash=sha384-$JS_HASH" >> $GITHUB_OUTPUT
+          echo "css_hash=sha384-$CSS_HASH" >> $GITHUB_OUTPUT
+          echo "Generated JS hash: sha384-$JS_HASH"
+          echo "Generated CSS hash: sha384-$CSS_HASH"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          body: |
+            ## Embed via jsDelivr CDN
+
+            Add this to your HTML:
+
+            ```html
+            <link rel="stylesheet"
+                  href="https://cdn.jsdelivr.net/gh/mrchrisneal/foundprint@${{ github.ref_name }}/foundprint.css"
+                  integrity="${{ steps.sri.outputs.css_hash }}"
+                  crossorigin="anonymous">
+
+            <div id="foundprint-demo"></div>
+
+            <script src="https://cdn.jsdelivr.net/gh/mrchrisneal/foundprint@${{ github.ref_name }}/foundprint.js"
+                    integrity="${{ steps.sri.outputs.js_hash }}"
+                    crossorigin="anonymous"></script>
+            ```
+
+            ### SRI Integrity Hashes
+            | File | Hash |
+            |------|------|
+            | `foundprint.js` | `${{ steps.sri.outputs.js_hash }}` |
+            | `foundprint.css` | `${{ steps.sri.outputs.css_hash }}` |
+
+            ---
+
+            ### Without SRI (uses latest 1.x)
+            ```html
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mrchrisneal/foundprint@1/foundprint.css">
+            <div id="foundprint-demo"></div>
+            <script src="https://cdn.jsdelivr.net/gh/mrchrisneal/foundprint@1/foundprint.js"></script>
+            ```
