@@ -26,7 +26,7 @@
   // ==========================================================================
 
   const CONFIG = {
-    version: '1.1.1',
+    version: '1.1.2',
     revealDelay: 400,        // ms between revealing each result
     typewriterSpeed: 15,     // ms per character (0 = instant)
     dramaticPause: 1200,     // ms before final results
@@ -1306,7 +1306,7 @@
       <div class="foundprint-final" id="foundprint-final" style="display: none;"></div>
       <div class="foundprint-end" id="foundprint-end" style="display: none;"></div>
       <div class="foundprint-footer">
-        <p>FOUNDprint v${CONFIG.version} by <a href="${CONFIG.authorUrl}" target="_blank" rel="noopener">Chris Neal</a></p>
+        <p>FOUNDprint <a href="${CONFIG.githubUrl}/releases" target="_blank" rel="noopener">v${CONFIG.version}</a> by <a href="${CONFIG.authorUrl}" target="_blank" rel="noopener">Chris Neal</a></p>
         <p><a href="${CONFIG.githubUrl}" target="_blank" rel="noopener">View on GitHub</a> · <a href="${CONFIG.githubUrl}/blob/main/METHODOLOGY.md" target="_blank" rel="noopener">How It Works</a></p>
         <p class="foundprint-footer-privacy">NOTE: All project code is <a href="${CONFIG.githubUrl}" target="_blank" rel="noopener">publicly auditable</a>.<br>No data is stored or recorded by this script.</p>
       </div>
