@@ -70,27 +70,29 @@ Or open `index.html` locally in any browser.
 
 ## Embedding in Your Site
 
-FOUNDprint is designed to be embedded in a blog post or any HTML page.
+FOUNDprint is designed to be embedded in a blog post or any HTML page. Files are served via the jsDelivr CDN.
 
-### Step 1: Host the Files
+### Recommended: Pinned Version with SRI
 
-Upload these files to your web server:
-- [`foundprint.js`](https://github.com/mrchrisneal/foundprint/blob/main/foundprint.js)
-- [`foundprint.css`](https://github.com/mrchrisneal/foundprint/blob/main/foundprint.css)
+Get the latest embed code with version-pinned URLs and [SRI integrity hashes](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) from the **[Releases page](https://github.com/mrchrisneal/foundprint/releases/latest)**.
 
-### Step 2: Add to Your Page
+### Alternative: Auto-Updating (No SRI)
+
+Use the `@1` tag to always get the latest 1.x version:
 
 ```html
-<link rel="stylesheet" href="/path/to/foundprint.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mrchrisneal/foundprint@1/foundprint.css">
 <div id="foundprint-demo"></div>
-<script src="/path/to/foundprint.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrchrisneal/foundprint@1/foundprint.js"></script>
 ```
 
 The script automatically finds `#foundprint-demo` and injects all necessary HTML.
 
-### WordPress
+### Self-Hosting
 
-Use a **Custom HTML** block to add the embed code. Host the JS/CSS files in your theme directory or via the Media Library.
+You can also download and host the files yourself:
+- [`foundprint.js`](https://github.com/mrchrisneal/foundprint/blob/main/foundprint.js)
+- [`foundprint.css`](https://github.com/mrchrisneal/foundprint/blob/main/foundprint.css)
 
 ## Configuration
 
@@ -98,7 +100,7 @@ Customize behavior by editing the `CONFIG` object at the top of `foundprint.js`:
 
 ```javascript
 const CONFIG = {
-  version: '1.0.0',
+  version: '1.1.0',
   revealDelay: 400,        // ms between each line reveal
   typewriterSpeed: 15,     // ms per character (0 = instant)
   dramaticPause: 1200,     // ms before final reveal
