@@ -329,10 +329,10 @@ total_uniqueness = 2^13.84 = 14,654
 
 ### The World Population Cap
 
-FOUNDprint uses 8.3 billion as the world population (UN estimate, December 2025). If your combined entropy suggests you're "1 in 50 trillion," the result is capped at world population because you can't be rarer than unique among all humans.
+FOUNDprint uses about 8.3 billion as the world population. If your combined entropy suggests you're "1 in 50 trillion," the result is capped at world population because you can't be rarer than unique among all humans.
 
 ```javascript
-// From foundprint.js line 101
+// From foundprint.js line 38
 const WORLD_POPULATION = 8.3e9;  // 8.3 billion
 ```
 
@@ -759,10 +759,10 @@ All calculations happen in **foundprint.js**:
 The code is heavily commented and includes source URLs for every data value.
 
 **Key locations in foundprint.js:**
-- Lines 117-320: Market share lookup tables with source URLs
-- Lines 336-533: Baseline entropy values with academic citations
-- Lines 581-591: The core math functions (`percentToEntropy`, `percentToOneInX`)
-- Lines 641-643: The entropy-to-uniqueness conversion
+- Lines 46-143: Market share lookup tables with source URLs (Section 2)
+- Lines 150-267: Baseline entropy values with academic citations (Section 3)
+- Lines 307-316: The core math functions (`percentToEntropy`, `percentToOneInX`)
+- Lines 350-352: The entropy-to-uniqueness conversion (`entropyToUniqueness`)
 
 ### 2. Check Panopticlick Directly
 
@@ -815,7 +815,7 @@ Or just type "log2(4.35)" into Google or Wolfram Alpha.
 | AmIUnique 2016 paper | 2016 | https://hal.inria.fr/hal-01285470/document |
 | HitC 2018 paper | 2018 | https://hal.inria.fr/hal-01718234v2/document |
 | Steam Hardware Survey | December 2024 | https://store.steampowered.com/hwsurvey/directx/ |
-| World Population | December 2025 | UN estimate: 8.3 billion |
+| World Population | — | About 8.3 billion |
 
 For the most current figures, check these source URLs directly.
 
@@ -824,8 +824,6 @@ For the most current figures, check these source URLs directly.
 ## 13. Glossary
 
 Quick definitions for terms used throughout this document:
-
-<dl>
 
 ### Baseline Entropy
 A pre-calculated entropy value from academic research, used when the market share for a specific value can't be looked up (e.g., your unique canvas fingerprint hash). FOUNDprint always uses the most conservative (lowest) estimate available.
@@ -861,15 +859,13 @@ The likelihood of something happening, expressed as a number from 0 (impossible)
 A text string your browser sends to every website identifying your browser name, version, and operating system. Example: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120..."
 
 ### World Population Cap
-FOUNDprint caps uniqueness at 8.3 billion (the world population) because you can't be rarer than "unique among all humans." If the math suggests you're "1 in 50 trillion," FOUNDprint displays that you're statistically unique.
-
-</dl>
+FOUNDprint caps uniqueness at about 8.3 billion (the world population) because you can't be rarer than "unique among all humans." If the math suggests you're "1 in 50 trillion," FOUNDprint displays that you're statistically unique.
 
 ---
 
 ## Questions or Feedback?
 
-FOUNDprint was created as a solo educational project for a blog post. If something isn't clear or you've found an error, feel free to reach out directly via email: **chris@neal.media**
+FOUNDprint was created as a solo educational project. If something isn't clear or you've found an error, feel free to reach out directly via email: **chris@neal.media**
 
 The complete source code is available at: **https://github.com/mrchrisneal/foundprint**
 

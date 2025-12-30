@@ -2,7 +2,7 @@
 
 **Fingerprint Output Using Non-IP Detection**
 
-An interactive browser fingerprinting demonstration originally created as a solo educational project for a blog post. FOUNDprint reveals how identifiable your browser is—without ever looking at your IP address.
+An interactive browser fingerprinting demonstration originally created as a solo educational project. FOUNDprint reveals how identifiable your browser is—without ever looking at your IP address.
 
 > **Project Repository:** https://github.com/mrchrisneal/foundprint
 > 
@@ -51,7 +51,7 @@ When your combined entropy exceeds the world population (8.3 billion), you are c
 
 - No data is transmitted to any server
 - No cookies are created or read
-- No localStorage or sessionStorage is used (except for the demo itself)
+- No localStorage or sessionStorage is used
 - No network requests are made
 - Nothing is stored, saved, or logged
 - The page can run completely offline
@@ -70,7 +70,7 @@ Or open `index.html` locally in any browser.
 
 ## Embedding in Your Site
 
-FOUNDprint is designed to be embedded in a blog post or any HTML page. Files are served via the jsDelivr CDN.
+FOUNDprint is designed to be embedded in any HTML page. Files are served via the jsDelivr CDN.
 
 ### Recommended: Pinned Version with SRI
 
@@ -164,7 +164,7 @@ The MD5 hash function is based on [blueimp/JavaScript-MD5](https://github.com/bl
 
 ### World Population Cap
 
-To prevent absurd uniqueness claims, calculations are capped at 8.3 billion (world population as of December 2025). If combined entropy exceeds this threshold, the user is shown a special message indicating they are "statistically unique among all 8 billion humans on Earth."
+To prevent absurd uniqueness claims, calculations are capped at about 8.3 billion (world population). If combined entropy exceeds this threshold, the user is shown a special message indicating they are "statistically unique among all 8 billion humans on Earth."
 
 ## Files
 
