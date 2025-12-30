@@ -1,5 +1,9 @@
 # FOUNDprint
 
+**Fingerprint Output Using Non-IP Detection**
+
+An interactive browser fingerprinting demonstration originally created as a solo educational project for a blog post. FOUNDprint reveals how identifiable your browser is—without ever looking at your IP address.
+
 > **Project Repository:** https://github.com/mrchrisneal/foundprint
 > 
 > **Live Demo:** https://neal.media/foundprint/
@@ -7,10 +11,6 @@
 > **Blog Post:** https://chris.neal.media/2025/the-vpn-trap/
 > 
 > **Contact:** chris@neal.media
-
-**Fingerprint Output Using Non-IP Detection**
-
-An interactive browser fingerprinting demonstration created as a solo educational project for a blog post. FOUNDprint reveals how identifiable your browser is—without ever looking at your IP address.
 
 ## What Is This?
 
@@ -100,7 +100,7 @@ Customize behavior by editing the `CONFIG` object at the top of `foundprint.js`:
 
 ```javascript
 const CONFIG = {
-  version: '1.1.0',
+  version: '1.1.3',
   revealDelay: 400,        // ms between each line reveal
   typewriterSpeed: 15,     // ms per character (0 = instant)
   dramaticPause: 1200,     // ms before final reveal
@@ -168,13 +168,13 @@ To prevent absurd uniqueness claims, calculations are capped at 8.3 billion (wor
 
 ## Files
 
-| File | Description |
-|------|-------------|
-| [`index.html`](https://github.com/mrchrisneal/foundprint/blob/main/index.html) | Demo page |
-| [`foundprint.js`](https://github.com/mrchrisneal/foundprint/blob/main/foundprint.js) | Main application (all logic, data, and tests) |
-| [`foundprint.css`](https://github.com/mrchrisneal/foundprint/blob/main/foundprint.css) | Styles |
-| [`README.md`](https://github.com/mrchrisneal/foundprint/blob/main/README.md) | This file |
-| [`METHODOLOGY.md`](https://github.com/mrchrisneal/foundprint/blob/main/METHODOLOGY.md) | Detailed explanation of entropy calculations |
+| File                                                                                   | Description                                   |
+|----------------------------------------------------------------------------------------|-----------------------------------------------|
+| [`index.html`](https://github.com/mrchrisneal/foundprint/blob/main/index.html)         | Demo page                                     |
+| [`foundprint.js`](https://github.com/mrchrisneal/foundprint/blob/main/foundprint.js)   | Main application (all logic, data, and tests) |
+| [`foundprint.css`](https://github.com/mrchrisneal/foundprint/blob/main/foundprint.css) | Styles                                        |
+| [`README.md`](https://github.com/mrchrisneal/foundprint/blob/main/README.md)           | This file                                     |
+| [`METHODOLOGY.md`](https://github.com/mrchrisneal/foundprint/blob/main/METHODOLOGY.md) | Detailed explanation of entropy calculations  |
 
 ## Further Reading
 

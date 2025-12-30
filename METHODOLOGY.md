@@ -3,7 +3,9 @@
 **A plain-language guide to how FOUNDprint calculates your browser's uniqueness**
 
 > **Project Repository:** https://github.com/mrchrisneal/foundprint
+> 
 > **This File:** https://github.com/mrchrisneal/foundprint/blob/main/METHODOLOGY.md
+> 
 > **Contact:** chris@neal.media
 
 This document explains everything about how FOUNDprint works—from the basic concepts to the specific numbers. Whether you're a curious beginner or a technical expert, you'll find what you need here.
