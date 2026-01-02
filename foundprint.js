@@ -26,7 +26,7 @@
   // ==========================================================================
 
   const CONFIG = {
-    version: '1.1.3',
+    version: '1.1.4',
     revealDelay: 400,        // ms between revealing each result
     typewriterSpeed: 15,     // ms per character (0 = instant)
     dramaticPause: 1200,     // ms before final results
@@ -1299,7 +1299,7 @@
         <h1 class="foundprint-title">FOUNDprint</h1>
       </div>
       <div class="foundprint-disclaimer" id="foundprint-disclaimer">
-        <p class="foundprint-tagline">This experiment analyzes your browser's characteristics to calculate how identifiable you are online—without ever looking at your IP address. All testing is performed locally on your device, and no data is sent or recorded. This experiment assumes one browser = one person. For the curious, you can review the <a href="${CONFIG.githubUrl}" target="_blank" rel="noopener">source code</a> at any time.</p>
+        <p class="foundprint-tagline">This experiment demonstrates how identifiable your browser is online—without ever looking at your IP address. Testing is local; nothing is stored or sent. It assumes one browser = one person, and results are <em>purely illustrative</em>. For the curious, review the <a href="${CONFIG.githubUrl}" target="_blank" rel="noopener">source code</a> anytime.</p>
         <button class="foundprint-start" id="foundprint-start">Start</button>
       </div>
       <div class="foundprint-results" id="foundprint-results" style="display: none;"></div>
